@@ -8,19 +8,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #080c0a;
-    --bg2: #0d1410;
-    --bg3: #111a14;
-    --card: #0f1a12;
-    --card2: #142018;
-    --border: #1e3325;
-    --accent: #39ff7a;
-    --accent2: #00ffcc;
-    --accent-dim: rgba(57,255,122,0.08);
-    --accent-glow: rgba(57,255,122,0.25);
-    --text: #e8f5ec;
-    --text2: #8aab92;
-    --text3: #4a6b52;
+    --bg: #060a10;
+    --bg2: #0a0f1a;
+    --bg3: #0d1520;
+    --card: #0b1422;
+    --card2: #101c2e;
+    --border: #162540;
+    --accent: #00d4ff;
+    --accent2: #0099ff;
+    --accent-dim: rgba(0,212,255,0.08);
+    --accent-glow: rgba(0,212,255,0.22);
+    --text: #e0f4ff;
+    --text2: #6b9ab8;
+    --text3: #2e5570;
     --danger: #ff4d6d;
     --warn: #ffd166;
   }
@@ -52,7 +52,7 @@
   .cursor-ring {
     position: fixed;
     width: 36px; height: 36px;
-    border: 1px solid rgba(57,255,122,0.4);
+    border: 1px solid rgba(0,212,255,0.4);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9998;
@@ -76,8 +76,8 @@
     position: fixed;
     inset: 0;
     background-image:
-      linear-gradient(rgba(57,255,122,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(57,255,122,0.03) 1px, transparent 1px);
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
     background-size: 60px 60px;
     pointer-events: none;
     z-index: 0;
@@ -166,7 +166,7 @@
     align-items: center;
     gap: 0.5rem;
     background: var(--accent-dim);
-    border: 1px solid rgba(57,255,122,0.2);
+    border: 1px solid rgba(0,212,255,0.2);
     border-radius: 50px;
     padding: 0.4rem 1rem;
     font-size: 0.8rem;
@@ -258,7 +258,7 @@
 
   .orb1 {
     width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(57,255,122,0.12), transparent 70%);
+    background: radial-gradient(circle, rgba(0,212,255,0.12), transparent 70%);
     top: 10%; right: 10%;
     animation: float1 8s ease-in-out infinite;
   }
@@ -337,7 +337,7 @@
   }
 
   .news-featured:hover {
-    border-color: rgba(57,255,122,0.3);
+    border-color: rgba(0,212,255,0.3);
     transform: translateY(-4px);
   }
 
@@ -369,7 +369,7 @@
     font-family: 'JetBrains Mono', monospace;
     color: var(--accent);
     background: var(--accent-dim);
-    border: 1px solid rgba(57,255,122,0.15);
+    border: 1px solid rgba(0,212,255,0.15);
     padding: 0.25rem 0.6rem;
     border-radius: 4px;
     display: inline-block;
@@ -416,7 +416,7 @@
   }
 
   .news-card:hover {
-    border-color: rgba(57,255,122,0.3);
+    border-color: rgba(0,212,255,0.3);
     transform: translateX(-4px);
   }
 
@@ -463,9 +463,9 @@
   .subject-card:hover::before { transform: scaleX(1); transform-origin: left; }
 
   .subject-card:hover {
-    border-color: rgba(57,255,122,0.2);
+    border-color: rgba(0,212,255,0.2);
     transform: translateY(-6px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(57,255,122,0.1);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,212,255,0.1);
   }
 
   .subject-header {
@@ -480,7 +480,7 @@
   .subject-icon {
     width: 48px; height: 48px;
     background: var(--accent-dim);
-    border: 1px solid rgba(57,255,122,0.15);
+    border: 1px solid rgba(0,212,255,0.15);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -510,9 +510,9 @@
   }
 
   .status-active {
-    background: rgba(57,255,122,0.1);
+    background: rgba(0,212,255,0.1);
     color: var(--accent);
-    border: 1px solid rgba(57,255,122,0.2);
+    border: 1px solid rgba(0,212,255,0.2);
   }
 
   .status-exam {
@@ -609,7 +609,7 @@
     font-size: 0.8rem;
     color: var(--accent);
     background: var(--accent-dim);
-    border: 1px solid rgba(57,255,122,0.15);
+    border: 1px solid rgba(0,212,255,0.15);
     border-radius: 6px;
     padding: 0.35rem 0.8rem;
     cursor: pointer;
@@ -618,8 +618,8 @@
   }
 
   .btn-details:hover {
-    background: rgba(57,255,122,0.15);
-    box-shadow: 0 0 15px rgba(57,255,122,0.2);
+    background: rgba(0,212,255,0.15);
+    box-shadow: 0 0 15px rgba(0,212,255,0.2);
   }
 
   /* ===== MODAL ===== */
@@ -645,7 +645,7 @@
 
   .modal {
     background: var(--card);
-    border: 1px solid rgba(57,255,122,0.2);
+    border: 1px solid rgba(0,212,255,0.2);
     border-radius: 20px;
     width: 100%;
     max-width: 600px;
@@ -653,7 +653,7 @@
     overflow-y: auto;
     transform: translateY(20px) scale(0.97);
     transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-    box-shadow: 0 0 60px rgba(57,255,122,0.1);
+    box-shadow: 0 0 60px rgba(0,212,255,0.1);
   }
 
   .modal-overlay.active .modal {
@@ -691,7 +691,7 @@
     transition: all 0.2s;
   }
 
-  .modal-close:hover { background: rgba(57,255,122,0.1); color: var(--accent); }
+  .modal-close:hover { background: rgba(0,212,255,0.1); color: var(--accent); }
 
   .modal-body { padding: 1.5rem; }
 
@@ -784,13 +784,190 @@
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
+  /* ===== MEDICAL ELEMENTS ===== */
+  .ecg-line {
+    position: absolute;
+    bottom: 18%;
+    left: 0; right: 0;
+    width: 100%;
+    height: 80px;
+    opacity: 1;
+    pointer-events: none;
+  }
+
+  /* Animated ECG draw */
+  .ecg-line polyline {
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    animation: drawEcg 3s ease forwards 0.5s;
+  }
+
+  @keyframes drawEcg {
+    to { stroke-dashoffset: 0; }
+  }
+
+  /* Medical cross watermark on cards */
+  .subject-card::after {
+    content: '✚';
+    position: absolute;
+    top: 1rem;
+    left: 1.2rem;
+    font-size: 0.65rem;
+    color: rgba(0,212,255,0.12);
+    pointer-events: none;
+  }
+
+  /* Heartbeat pulse on live dot */
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); opacity: 1; }
+    14% { transform: scale(1.3); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.2); }
+    70% { opacity: 0.5; }
+  }
+
+  .nav-logo .dot {
+    animation: heartbeat 1.8s ease-in-out infinite !important;
+  }
+
+  /* ===== MOBILE BOTTOM NAV ===== */
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 900;
+    background: rgba(8,12,10,0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border);
+    padding: 0.6rem 0 calc(0.6rem + env(safe-area-inset-bottom));
+  }
+
+  .mobile-nav-inner {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    text-decoration: none;
+    color: var(--text3);
+    font-size: 0.7rem;
+    padding: 0.4rem 1.2rem;
+    border-radius: 12px;
+    transition: color 0.2s, background 0.2s;
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: 'Tajawal', sans-serif;
+  }
+
+  .mobile-nav-item.active,
+  .mobile-nav-item:hover {
+    color: var(--accent);
+    background: var(--accent-dim);
+  }
+
+  .mobile-nav-icon {
+    font-size: 1.3rem;
+    line-height: 1;
+  }
+
+  /* ===== MOBILE HERO CARDS ===== */
+  .mobile-quick {
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .quick-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem 0.5rem;
+    text-align: center;
+    transition: border-color 0.3s;
+  }
+
+  .quick-card:hover { border-color: rgba(0,212,255,0.3); }
+
+  .quick-icon { font-size: 1.5rem; margin-bottom: 0.4rem; }
+  .quick-num { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 700; color: var(--accent); display: block; }
+  .quick-label { font-size: 0.7rem; color: var(--text3); }
+
+  /* ===== TABLET ===== */
+  @media (max-width: 1024px) {
+    .subjects-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ===== MOBILE ===== */
   @media (max-width: 768px) {
-    .news-grid { grid-template-columns: 1fr; }
-    .subjects-grid { grid-template-columns: 1fr; }
-    .nav-links { display: none; }
-    .hero-stats { gap: 1.5rem; }
     body { cursor: auto; }
     .cursor, .cursor-ring { display: none; }
+
+    /* Nav */
+    nav { padding: 0 1rem; }
+    .nav-links { display: none; }
+    .mobile-nav { display: block; }
+
+    /* Hero */
+    .hero {
+      padding: 5rem 1.25rem 2rem;
+      min-height: auto;
+    }
+    .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 0.95rem; }
+    .hero-stats { display: none; }
+    .mobile-quick { display: grid; }
+    .hero-scroll { display: none; }
+    .orb1 { width: 200px; height: 200px; }
+    .orb2 { width: 150px; height: 150px; }
+
+    /* Sections */
+    section {
+      padding: 3rem 1.25rem;
+      padding-bottom: 1.5rem;
+    }
+
+    /* last section needs bottom padding for mobile nav */
+    section:last-of-type {
+      padding-bottom: 6rem;
+    }
+
+    footer { padding-bottom: calc(1.5rem + 70px); }
+
+    /* News */
+    .news-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .news-img { height: 160px; }
+    .news-featured h3 { font-size: 1rem; }
+    .news-side { gap: 0.75rem; }
+
+    /* Subjects */
+    .subjects-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .subject-header { padding: 1.2rem; }
+    .subject-title { font-size: 1rem; }
+    .subject-body { padding: 1rem 1.2rem; }
+    .subject-footer { padding: 0.75rem 1.2rem; }
+
+    /* Modal */
+    .modal-overlay { padding: 0; align-items: flex-end; }
+    .modal {
+      border-radius: 20px 20px 0 0;
+      max-height: 90vh;
+    }
+
+    /* Section titles */
+    .section-title { font-size: 1.6rem; }
+  }
+
+  @media (max-width: 380px) {
+    .hero h1 { font-size: 1.8rem; }
+    .mobile-quick { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+    .quick-card { padding: 0.75rem 0.3rem; }
   }
 </style>
 </head>
@@ -816,6 +993,12 @@
   <div class="orb orb1"></div>
   <div class="orb orb2"></div>
 
+  <!-- ECG decoration -->
+  <svg class="ecg-line" viewBox="0 0 800 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <polyline points="0,40 80,40 100,40 110,10 120,70 130,20 145,55 160,40 240,40 260,40 270,10 280,70 290,20 305,55 320,40 400,40 420,40 430,10 440,70 450,20 465,55 480,40 560,40 580,40 590,10 600,70 610,20 625,55 640,40 720,40 740,40 750,10 760,70 770,20 785,55 800,40"
+      fill="none" stroke="rgba(0,212,255,0.18)" stroke-width="1.5"/>
+  </svg>
+
   <div class="hero-badge">
     <span class="dot" style="width:6px;height:6px;"></span>
     كلية الطب البيطري — السنة الثالثة
@@ -835,6 +1018,25 @@
     <div class="stat">
       <span class="stat-num">68%</span>
       <div class="stat-label">المنهج</div>
+    </div>
+  </div>
+
+  <!-- Mobile quick cards -->
+  <div class="mobile-quick">
+    <div class="quick-card">
+      <div class="quick-icon">📚</div>
+      <span class="quick-num">6</span>
+      <div class="quick-label">مواد</div>
+    </div>
+    <div class="quick-card">
+      <div class="quick-icon">📰</div>
+      <span class="quick-num">3</span>
+      <div class="quick-label">أخبار</div>
+    </div>
+    <div class="quick-card">
+      <div class="quick-icon">✅</div>
+      <span class="quick-num">68%</span>
+      <div class="quick-label">المنهج</div>
     </div>
   </div>
 
@@ -899,6 +1101,24 @@
 <footer>
   صُنع بـ <span>♥</span> لدفعتنا — آخر تحديث: <span>1 أبريل 2026</span>
 </footer>
+
+<!-- MOBILE BOTTOM NAV -->
+<nav class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <a href="#" class="mobile-nav-item active" onclick="setActive(this)">
+      <span class="mobile-nav-icon">🏠</span>
+      الرئيسية
+    </a>
+    <a href="#news" class="mobile-nav-item" onclick="setActive(this)">
+      <span class="mobile-nav-icon">📰</span>
+      الأخبار
+    </a>
+    <a href="#subjects" class="mobile-nav-item" onclick="setActive(this)">
+      <span class="mobile-nav-icon">📚</span>
+      المواد
+    </a>
+  </div>
+</nav>
 
 <!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay">
@@ -1159,12 +1379,12 @@ document.querySelectorAll('a, button, .news-card, .news-featured, .subject-card'
   el.addEventListener('mouseenter', () => {
     cursor.style.transform = 'scale(2)';
     ring.style.transform = 'scale(1.5)';
-    ring.style.borderColor = 'rgba(57,255,122,0.6)';
+    ring.style.borderColor = 'rgba(0,212,255,0.6)';
   });
   el.addEventListener('mouseleave', () => {
     cursor.style.transform = 'scale(1)';
     ring.style.transform = 'scale(1)';
-    ring.style.borderColor = 'rgba(57,255,122,0.4)';
+    ring.style.borderColor = 'rgba(0,212,255,0.4)';
   });
 });
 
@@ -1187,6 +1407,29 @@ renderSubjects();
 setTimeout(() => {
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 }, 100);
+
+// ===== MOBILE NAV ACTIVE =====
+function setActive(el) {
+  document.querySelectorAll('.mobile-nav-item').forEach(i => i.classList.remove('active'));
+  el.classList.add('active');
+}
+
+// Auto-highlight mobile nav on scroll
+const sections = { news: document.getElementById('news'), subjects: document.getElementById('subjects') };
+window.addEventListener('scroll', () => {
+  const y = window.scrollY + 100;
+  const items = document.querySelectorAll('.mobile-nav-item');
+  if (sections.subjects && y >= sections.subjects.offsetTop) {
+    items.forEach(i => i.classList.remove('active'));
+    items[2].classList.add('active');
+  } else if (sections.news && y >= sections.news.offsetTop) {
+    items.forEach(i => i.classList.remove('active'));
+    items[1].classList.add('active');
+  } else {
+    items.forEach(i => i.classList.remove('active'));
+    items[0].classList.add('active');
+  }
+});
 </script>
 </body>
 </html>
