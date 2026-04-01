@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بوابة الدفعة — كلية الطب البيطري</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c0a;
+    --bg2: #0d1410;
+    --bg3: #111a14;
+    --card: #0f1a12;
+    --card2: #142018;
+    --border: #1e3325;
+    --accent: #39ff7a;
+    --accent2: #00ffcc;
+    --accent-dim: rgba(57,255,122,0.08);
+    --accent-glow: rgba(57,255,122,0.25);
+    --text: #e8f5ec;
+    --text2: #8aab92;
+    --text3: #4a6b52;
+    --danger: #ff4d6d;
+    --warn: #ffd166;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Tajawal', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom Cursor */
+  .cursor {
+    position: fixed;
+    width: 10px; height: 10px;
+    background: var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s;
+    box-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent-glow);
+    mix-blend-mode: screen;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(57,255,122,0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* Grid background */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(57,255,122,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(57,255,122,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===== NAVBAR ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 900;
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(8,12,10,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .nav-logo .dot {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; right: 0;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--accent-dim);
+    border: 1px solid rgba(57,255,122,0.2);
+    border-radius: 50px;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    animation: fadeUp 0.7s ease 0.1s both;
+  }
+
+  .hero h1 span {
+    color: var(--accent);
+    text-shadow: 0 0 40px var(--accent-glow);
+    position: relative;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+    color: var(--text2);
+    max-width: 500px;
+    line-height: 1.7;
+    animation: fadeUp 0.7s ease 0.2s both;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+    animation: fadeUp 0.7s ease 0.3s both;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--text3);
+    margin-top: 0.25rem;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text3);
+    font-size: 0.75rem;
+    animation: bounce 2s infinite;
+  }
+
+  .hero-scroll::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(var(--accent), transparent);
+  }
+
+  @keyframes bounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* Glow orb */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+  }
+
+  .orb1 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(57,255,122,0.12), transparent 70%);
+    top: 10%; right: 10%;
+    animation: float1 8s ease-in-out infinite;
+  }
+
+  .orb2 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(0,255,204,0.08), transparent 70%);
+    bottom: 20%; left: 5%;
+    animation: float2 10s ease-in-out infinite;
+  }
+
+  @keyframes float1 {
+    0%,100% { transform: translate(0,0); }
+    50% { transform: translate(-20px, 20px); }
+  }
+  @keyframes float2 {
+    0%,100% { transform: translate(0,0); }
+    50% { transform: translate(20px, -20px); }
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 20px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-sub {
+    color: var(--text2);
+    font-size: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  /* ===== NEWS ===== */
+  .news-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .news-featured {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: pointer;
+  }
+
+  .news-featured:hover {
+    border-color: rgba(57,255,122,0.3);
+    transform: translateY(-4px);
+  }
+
+  .news-img {
+    width: 100%;
+    height: 220px;
+    background: linear-gradient(135deg, var(--bg3), var(--card2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .news-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 50%, var(--card));
+  }
+
+  .news-content {
+    padding: 1.5rem;
+  }
+
+  .news-tag {
+    font-size: 0.7rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid rgba(57,255,122,0.15);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 0.75rem;
+  }
+
+  .news-featured h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+  }
+
+  .news-featured p {
+    color: var(--text2);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .news-meta {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--text3);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .news-side {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .news-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: pointer;
+    flex: 1;
+  }
+
+  .news-card:hover {
+    border-color: rgba(57,255,122,0.3);
+    transform: translateX(-4px);
+  }
+
+  .news-card h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    line-height: 1.4;
+  }
+
+  .news-card p {
+    color: var(--text2);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  /* ===== SUBJECTS ===== */
+  .subjects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .subject-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
+    position: relative;
+  }
+
+  .subject-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .subject-card:hover::before { transform: scaleX(1); transform-origin: left; }
+
+  .subject-card:hover {
+    border-color: rgba(57,255,122,0.2);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(57,255,122,0.1);
+  }
+
+  .subject-header {
+    padding: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .subject-icon {
+    width: 48px; height: 48px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(57,255,122,0.15);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .subject-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  .subject-doctor {
+    font-size: 0.82rem;
+    color: var(--text2);
+  }
+
+  .subject-status {
+    font-size: 0.7rem;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .status-active {
+    background: rgba(57,255,122,0.1);
+    color: var(--accent);
+    border: 1px solid rgba(57,255,122,0.2);
+  }
+
+  .status-exam {
+    background: rgba(255,77,109,0.1);
+    color: var(--danger);
+    border: 1px solid rgba(255,77,109,0.2);
+  }
+
+  .status-wait {
+    background: rgba(255,209,102,0.1);
+    color: var(--warn);
+    border: 1px solid rgba(255,209,102,0.2);
+  }
+
+  .subject-body {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .progress-text {
+    font-size: 0.82rem;
+    color: var(--text2);
+  }
+
+  .progress-pct {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.82rem;
+    color: var(--accent);
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    border-radius: 2px;
+    transition: width 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 0 10px var(--accent-glow);
+    width: 0;
+  }
+
+  .subject-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .info-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.7rem;
+  }
+
+  .info-key {
+    font-size: 0.72rem;
+    color: var(--text3);
+    margin-bottom: 0.25rem;
+  }
+
+  .info-val {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .subject-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .subject-last {
+    font-size: 0.78rem;
+    color: var(--text3);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .btn-details {
+    font-size: 0.8rem;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid rgba(57,255,122,0.15);
+    border-radius: 6px;
+    padding: 0.35rem 0.8rem;
+    cursor: pointer;
+    transition: background 0.3s, box-shadow 0.3s;
+    font-family: 'Tajawal', sans-serif;
+  }
+
+  .btn-details:hover {
+    background: rgba(57,255,122,0.15);
+    box-shadow: 0 0 15px rgba(57,255,122,0.2);
+  }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(10px);
+    z-index: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal {
+    background: var(--card);
+    border: 1px solid rgba(57,255,122,0.2);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    transform: translateY(20px) scale(0.97);
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 0 60px rgba(57,255,122,0.1);
+  }
+
+  .modal-overlay.active .modal {
+    transform: translateY(0) scale(1);
+  }
+
+  .modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: var(--card);
+    z-index: 1;
+  }
+
+  .modal-header h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .modal-close {
+    width: 36px; height: 36px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text2);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .modal-close:hover { background: rgba(57,255,122,0.1); color: var(--accent); }
+
+  .modal-body { padding: 1.5rem; }
+
+  .modal-section { margin-bottom: 1.5rem; }
+
+  .modal-section-title {
+    font-size: 0.8rem;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .modal-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .chapter-list { list-style: none; }
+
+  .chapter-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+
+  .chapter-item:last-child { border-bottom: none; }
+
+  .chapter-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dot-done { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+  .dot-progress { background: var(--warn); }
+  .dot-pending { background: var(--border); }
+
+  .chapter-name { flex: 1; }
+  .chapter-status { font-size: 0.75rem; color: var(--text3); font-family: 'JetBrains Mono', monospace; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    color: var(--text3);
+    font-size: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  footer span { color: var(--accent); }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.23,1,0.32,1), transform 0.7s cubic-bezier(0.23,1,0.32,1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  @media (max-width: 768px) {
+    .news-grid { grid-template-columns: 1fr; }
+    .subjects-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero-stats { gap: 1.5rem; }
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">
+    <div class="dot"></div>
+    بوابة الدفعة
+  </div>
+  <ul class="nav-links">
+    <li><a href="#news">الأخبار</a></li>
+    <li><a href="#subjects">المواد</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+
+  <div class="hero-badge">
+    <span class="dot" style="width:6px;height:6px;"></span>
+    كلية الطب البيطري — السنة الثالثة
+  </div>
+  <h1>بوابة <span>الدفعة</span></h1>
+  <p>كل اللي محتاجه في مكان واحد — المواد، المنهج، والأخبار</p>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">6</span>
+      <div class="stat-label">مواد</div>
+    </div>
+    <div class="stat">
+      <span class="stat-num">3</span>
+      <div class="stat-label">أخبار جديدة</div>
+    </div>
+    <div class="stat">
+      <span class="stat-num">68%</span>
+      <div class="stat-label">المنهج</div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">اسحب للأسفل</div>
+</div>
+
+<!-- NEWS -->
+<section id="news">
+  <div class="section-label">آخر الأخبار</div>
+  <h2 class="section-title">أخبار الدفعة</h2>
+  <p class="section-sub">آخر التحديثات والإعلانات المهمة</p>
+
+  <div class="news-grid reveal">
+    <div class="news-featured">
+      <div class="news-img">📋</div>
+      <div class="news-content">
+        <span class="news-tag">امتحانات</span>
+        <h3>جدول امتحانات نهاية الفصل الدراسي</h3>
+        <p>تم رفع الجدول الرسمي لامتحانات نهاية الفصل، راجع مواعيد كل مادة وابدأ في التنظيم مبكراً.</p>
+        <div class="news-meta">
+          <span>📅 1 أبريل 2026</span>
+          <span>•</span>
+          <span>⏱ مهم</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="news-side">
+      <div class="news-card">
+        <span class="news-tag">محاضرات</span>
+        <h4>محاضرة الباثولوجيا اتغيرت لقاعة 205</h4>
+        <p>غداً المحاضرة هتبقى في القاعة الجديدة بدل المعتاد.</p>
+        <div class="news-meta" style="margin-top:0.5rem;font-size:0.75rem;">📅 31 مارس</div>
+      </div>
+
+      <div class="news-card">
+        <span class="news-tag">عام</span>
+        <h4>إجازة الأحد القادم رسمية</h4>
+        <p>تم إلغاء كل المحاضرات يوم الأحد القادم بقرار من العميد.</p>
+        <div class="news-meta" style="margin-top:0.5rem;font-size:0.75rem;">📅 30 مارس</div>
+      </div>
+
+      <div class="news-card">
+        <span class="news-tag">مذاكرة</span>
+        <h4>ملف مراجعة الفارماكولوجي متاح</h4>
+        <p>تم رفع ملف المراجعة الشامل لمادة الفارماكولوجيا على الجروب.</p>
+        <div class="news-meta" style="margin-top:0.5rem;font-size:0.75rem;">📅 28 مارس</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBJECTS -->
+<section id="subjects">
+  <div class="section-label">المواد الدراسية</div>
+  <h2 class="section-title">وصلنا لحد فين؟</h2>
+  <p class="section-sub">تتبع تقدم المنهج في كل مادة</p>
+
+  <div class="subjects-grid" id="subjectsGrid"></div>
+</section>
+
+<footer>
+  صُنع بـ <span>♥</span> لدفعتنا — آخر تحديث: <span>1 أبريل 2026</span>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modalTitle">تفاصيل المادة</h2>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// ===== DATA =====
+const subjects = [
+  {
+    icon: '🔬',
+    name: 'الباثولوجيا العامة',
+    doctor: 'أ.د. محمد الشريف',
+    status: 'active',
+    statusText: 'جاري',
+    progress: 70,
+    lastLecture: '30 مارس',
+    totalChapters: 10,
+    doneChapters: 7,
+    nextExam: '15 مايو',
+    chapters: [
+      { name: 'مقدمة في الباثولوجيا', status: 'done' },
+      { name: 'الالتهاب الحاد', status: 'done' },
+      { name: 'الالتهاب المزمن', status: 'done' },
+      { name: 'الأورام الحميدة', status: 'done' },
+      { name: 'الأورام الخبيثة', status: 'done' },
+      { name: 'أمراض الدم', status: 'done' },
+      { name: 'أمراض الجهاز الهضمي', status: 'done' },
+      { name: 'أمراض الجهاز التنفسي', status: 'progress' },
+      { name: 'أمراض الجهاز البولي', status: 'pending' },
+      { name: 'المراجعة العامة', status: 'pending' },
+    ]
+  },
+  {
+    icon: '💊',
+    name: 'الفارماكولوجيا',
+    doctor: 'أ.د. سمير رضوان',
+    status: 'exam',
+    statusText: 'امتحان قريب',
+    progress: 90,
+    lastLecture: '29 مارس',
+    totalChapters: 8,
+    doneChapters: 7,
+    nextExam: '10 مايو',
+    chapters: [
+      { name: 'أساسيات الفارماكولوجيا', status: 'done' },
+      { name: 'المضادات الحيوية', status: 'done' },
+      { name: 'أدوية الجهاز العصبي', status: 'done' },
+      { name: 'أدوية القلب والأوعية', status: 'done' },
+      { name: 'أدوية الجهاز الهضمي', status: 'done' },
+      { name: 'الهرمونات والأدوية الهرمونية', status: 'done' },
+      { name: 'المُرخيات العضلية والتخدير', status: 'done' },
+      { name: 'المراجعة والملخص', status: 'progress' },
+    ]
+  },
+  {
+    icon: '🦠',
+    name: 'الميكروبيولوجيا',
+    doctor: 'أ.د. هالة منصور',
+    status: 'active',
+    statusText: 'جاري',
+    progress: 55,
+    lastLecture: '28 مارس',
+    totalChapters: 9,
+    doneChapters: 5,
+    nextExam: '20 مايو',
+    chapters: [
+      { name: 'البكتيريا — التشريح والتصنيف', status: 'done' },
+      { name: 'الفيروسات الأساسية', status: 'done' },
+      { name: 'الفطريات', status: 'done' },
+      { name: 'الطفيليات الداخلية', status: 'done' },
+      { name: 'الطفيليات الخارجية', status: 'done' },
+      { name: 'المناعة والتطعيم', status: 'progress' },
+      { name: 'الأمراض المشتركة', status: 'pending' },
+      { name: 'التشخيص المختبري', status: 'pending' },
+      { name: 'المراجعة', status: 'pending' },
+    ]
+  },
+  {
+    icon: '🏥',
+    name: 'الجراحة البيطرية',
+    doctor: 'أ.د. أحمد قاسم',
+    status: 'active',
+    statusText: 'جاري',
+    progress: 60,
+    lastLecture: '27 مارس',
+    totalChapters: 8,
+    doneChapters: 5,
+    nextExam: '18 مايو',
+    chapters: [
+      { name: 'مبادئ الجراحة العامة', status: 'done' },
+      { name: 'التخدير البيطري', status: 'done' },
+      { name: 'جراحة الجهاز الهضمي', status: 'done' },
+      { name: 'جراحة العظام', status: 'done' },
+      { name: 'جراحة الجهاز التناسلي', status: 'done' },
+      { name: 'جراحة العين والأذن', status: 'progress' },
+      { name: 'جراحة الجهاز البولي', status: 'pending' },
+      { name: 'المراجعة', status: 'pending' },
+    ]
+  },
+  {
+    icon: '🧬',
+    name: 'الفسيولوجيا',
+    doctor: 'أ.د. نادية سالم',
+    status: 'wait',
+    statusText: 'متأخر',
+    progress: 40,
+    lastLecture: '25 مارس',
+    totalChapters: 10,
+    doneChapters: 4,
+    nextExam: '22 مايو',
+    chapters: [
+      { name: 'فسيولوجيا الخلية', status: 'done' },
+      { name: 'الجهاز العصبي', status: 'done' },
+      { name: 'الجهاز الدوري', status: 'done' },
+      { name: 'الجهاز التنفسي', status: 'done' },
+      { name: 'الجهاز الهضمي', status: 'progress' },
+      { name: 'الجهاز البولي', status: 'pending' },
+      { name: 'الغدد الصماء', status: 'pending' },
+      { name: 'الجهاز التناسلي', status: 'pending' },
+      { name: 'فسيولوجيا التكيف', status: 'pending' },
+      { name: 'المراجعة', status: 'pending' },
+    ]
+  },
+  {
+    icon: '⚗️',
+    name: 'الكيمياء الحيوية',
+    doctor: 'أ.د. عمر فاروق',
+    status: 'active',
+    statusText: 'جاري',
+    progress: 75,
+    lastLecture: '31 مارس',
+    totalChapters: 8,
+    doneChapters: 6,
+    nextExam: '12 مايو',
+    chapters: [
+      { name: 'البروتينات والإنزيمات', status: 'done' },
+      { name: 'الكربوهيدرات والأيض', status: 'done' },
+      { name: 'الدهون والأيض الدهني', status: 'done' },
+      { name: 'الأحماض النووية', status: 'done' },
+      { name: 'الفيتامينات والمعادن', status: 'done' },
+      { name: 'التوازن الحمضي القاعدي', status: 'done' },
+      { name: 'الكيمياء الحيوية السريرية', status: 'progress' },
+      { name: 'المراجعة', status: 'pending' },
+    ]
+  }
+];
+
+// ===== RENDER SUBJECTS =====
+function renderSubjects() {
+  const grid = document.getElementById('subjectsGrid');
+  grid.innerHTML = subjects.map((s, i) => `
+    <div class="subject-card reveal" style="transition-delay: ${i * 0.08}s">
+      <div class="subject-header">
+        <div style="display:flex;gap:1rem;align-items:flex-start">
+          <div class="subject-icon">${s.icon}</div>
+          <div>
+            <div class="subject-title">${s.name}</div>
+            <div class="subject-doctor">${s.doctor}</div>
+          </div>
+        </div>
+        <span class="subject-status status-${s.status}">${s.statusText}</span>
+      </div>
+      <div class="subject-body">
+        <div class="progress-label">
+          <span class="progress-text">تقدم المنهج</span>
+          <span class="progress-pct">${s.progress}%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" data-width="${s.progress}"></div>
+        </div>
+        <div class="subject-info">
+          <div class="info-item">
+            <div class="info-key">الأبواب المكتملة</div>
+            <div class="info-val">${s.doneChapters} / ${s.totalChapters}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-key">موعد الامتحان</div>
+            <div class="info-val">${s.nextExam}</div>
+          </div>
+        </div>
+      </div>
+      <div class="subject-footer">
+        <span class="subject-last">آخر محاضرة: ${s.lastLecture}</span>
+        <button class="btn-details" onclick="openModal(${i})">التفاصيل ◀</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===== MODAL =====
+function openModal(i) {
+  const s = subjects[i];
+  document.getElementById('modalTitle').textContent = s.icon + ' ' + s.name;
+  document.getElementById('modalBody').innerHTML = `
+    <div class="modal-section">
+      <div class="modal-section-title">معلومات المادة</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem">
+        <div class="info-item"><div class="info-key">الدكتور</div><div class="info-val">${s.doctor}</div></div>
+        <div class="info-item"><div class="info-key">الامتحان</div><div class="info-val">${s.nextExam}</div></div>
+        <div class="info-item"><div class="info-key">الأبواب المنتهية</div><div class="info-val">${s.doneChapters} / ${s.totalChapters}</div></div>
+        <div class="info-item"><div class="info-key">آخر محاضرة</div><div class="info-val">${s.lastLecture}</div></div>
+      </div>
+    </div>
+    <div class="modal-section">
+      <div class="modal-section-title">الأبواب</div>
+      <ul class="chapter-list">
+        ${s.chapters.map(c => `
+          <li class="chapter-item">
+            <div class="chapter-dot dot-${c.status}"></div>
+            <span class="chapter-name">${c.name}</span>
+            <span class="chapter-status">${c.status === 'done' ? '✓ منتهي' : c.status === 'progress' ? '⟳ جاري' : '○ لم يبدأ'}</span>
+          </li>
+        `).join('')}
+      </ul>
+    </div>
+  `;
+  document.getElementById('modalOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modalOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+// ===== CURSOR =====
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 5 + 'px';
+  cursor.style.top = my - 5 + 'px';
+});
+
+function animateRing() {
+  rx += (mx - rx - 18) * 0.12;
+  ry += (my - ry - 18) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('a, button, .news-card, .news-featured, .subject-card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'scale(2)';
+    ring.style.transform = 'scale(1.5)';
+    ring.style.borderColor = 'rgba(57,255,122,0.6)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'scale(1)';
+    ring.style.transform = 'scale(1)';
+    ring.style.borderColor = 'rgba(57,255,122,0.4)';
+  });
+});
+
+// ===== REVEAL ON SCROLL =====
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // animate progress bars
+      entry.target.querySelectorAll('.progress-fill').forEach(bar => {
+        bar.style.width = bar.dataset.width + '%';
+      });
+    }
+  });
+}, { threshold: 0.1 });
+
+// ===== INIT =====
+renderSubjects();
+
+setTimeout(() => {
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}, 100);
+</script>
+</body>
+</html>
